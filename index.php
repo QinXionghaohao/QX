@@ -29,7 +29,7 @@ if(isset($obj->error)){
         echo $obj->success;
     }
 }
-
+?>
 <?php 
-    echo "nihao";
+    echo "nihao haohao";
 ?>
