@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 header("content-Type:text/html;charset=UTF-8");
 header("Access-Control-Allow-Origin:*");
 require_once 'class/User.class.php';
@@ -29,3 +29,7 @@ if(isset($obj->error)){
         echo $obj->success;
     }
 }
+
+<?php 
+    echo "nihao";
+?>
