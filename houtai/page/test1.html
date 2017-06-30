@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta name="keywords" content="scclui框架">
+	<meta name="description" content="scclui为轻量级的网站后台管理系统模版。">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>首页</title>
+  <style type="text/css">
+    	.aa div{
+    		display: inline-block;
+    	}
+    </style>
+  </head>
+  
+  <body>
+		<h3 id="t">甜品</h3>
+		<div id="data" class="aa">
+		</div>
+		<h3 id="y">饮料</h3>
+		<div id="datb" class="aa">
+		</div>
+		<h3 id="l">零食</h3>
+		<div id="date" class="aa">
+		</div>
+  </body>
+  <script type="text/javascript" src="../../html/jquery-1.7.1.js"></script>
+  <script type="text/javascript">
+		$(function(){
+			var name="甜品";
+			$.ajax({
+				type:"get",
+				data:{"name":name,"class":"Mvc","action":"fl"},
+				url:"http://localhost/XM/index.php?",
+				success:function(res){
+						res=eval(res);
+					for(i=0;i<res.length;i++){
+						var obj = res[i];
+						var img = obj['img']
+						var tp="<img src='../"+img+"' style='height:300px;width:300px'>";
+						$("#data").append("<div>"+tp+"</div>");
+					}
+				}
+			});
+			var name="饮料";
+			$.ajax({
+				type:"get",
+				data:{"name":name,"class":"Mvc","action":"fl"},
+				url:"http://localhost/XM/index.php?",
+				success:function(res){
+						res=eval(res);
+					for(i=0;i<res.length;i++){
+						var obj = res[i];
+						var img = obj['img']
+						var tp="<img src='../"+img+"' style='height:300px;width:300px'>";
+						$("#datb").append("<div>"+tp+"</div>");
+					}
+				}
+			});
+			
+					var name="零食";
+					$.ajax({
+						type:"get",
+						data:{"name":name,"class":"Mvc","action":"fl"},
+						url:"http://localhost/XM/index.php?",
+						success:function(res){
+								res=eval(res);
+							for(i=0;i<res.length;i++){
+								var obj = res[i];
+								var img = obj['img']
+								var tp="<img src='../"+img+"' style='height:300px;width:300px'>";
+								$("#date").append("<div>"+tp+"</div>");
+							}
+						}
+					});
+			
+		})
+  	
+  </script>
+</html>

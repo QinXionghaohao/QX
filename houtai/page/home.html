@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta name="keywords" content="scclui框架">
+	<meta name="description" content="scclui为轻量级的网站后台管理系统模版。">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>首页</title>
+    <style type="text/css">
+    	body{
+    		background-color: aquamarine;
+    	}
+    	a{
+    		border: 1px solid black;
+    		padding: 2px 10px;
+    		background-color: powderblue;
+    		text-decoration: none;
+    		color: black;
+    		font-size: 13px;
+    		box-shadow: 2px 2px 5px lightblue;
+    	}
+    </style>
+  </head>
+  
+  <body>
+  		<span id="gly"></span>
+  		<h3>添加商品</h3>
+  		<form action="http://localhost/XM/class/tianjia.php" enctype="multipart/form-data" method="post">
+  			商品名称：<input type="text" name="namesp" id="namesp" size="10"/>
+  			商品价格：<input type="text" name="jiage" id="jiage" size="5"/>
+  			数量：<input type="text" name="shu" id="shu" size="5"/>
+  			图片：<input type="file" name="filename" id="img" />
+  			类别：<select name="spfl_id" id="spfl_id" >
+  				<option value="0">请选择</option>
+  				<option value="1" >甜品</option>
+  				<option value="2" >饮料</option>
+  				<option value="3" >零食</option>
+  			</select>
+  			<!--<button id="add">添加</button>-->
+  			<input type="submit" id="add" value="添加" />
+  		</from>
+			<table width="100%" id="data" style="margin:30px;">
+			<tr>
+				<td class="px">排序</td>
+				<td class="sp">商品名</td>
+				<td>价格</td>
+				<td>图片</td>
+				<td>数量</td>
+				<td>分类</td>
+				<td>状态</td>
+			</tr>
+		</table>
+		
+  </body>
+  <script type="text/javascript" src="../../html/jquery-1.7.1.js"></script>
+  <script type="text/javascript">
+  	$(function(){
+  		
+			$.get('http://localhost/XM/class/xians.php',
+				function(res){
+					for(i=0;i<res.length;i++){
+						var obj = res[i];
+						var shan = "<a href='#' class='shan' for='"+obj.id+"'>删除</a>";
+						var xia = "<a href='#' class='xia' for='"+obj.id+"'>上/下架</a>";
+						var img = obj['img'];
+						var tp ="<img src='../"+img+"' style='height:100px;width:100px' />";
+						$("#data").append("<tr id='a"+obj.id+"'><td>"+(i+1)+"</td><td>"+obj.namesp+"</td><td>"+obj.jiage+"</td><td>"+tp+"</td><td>"+obj.shu+"</td><td>"+obj.name+"</td><td id='xx'>"+obj.sx+"</td><td>"+shan+"</td><td>"+xia+"</td></tr>")
+					}
+				},
+				"json"//显示数据类型
+			)
+			/*
+			 删除商品*/
+			$(".shan").live("click",function(){
+				var id=$(this).attr("for");
+				if(confirm("是否删除")){	
+					$.ajax({
+						type:"get",
+						data:{"id":id},
+						url:"http://localhost/XM/class/xiajia.php",
+						success:function(res){
+							if(res){
+//								alert("成功");
+								$("#a"+id+"").remove();
+							}else{
+								alert("失败");
+							}
+						}
+					});
+				}
+			})
+			$(".xia").live("click",function(){
+				var id = $(this).attr("for");
+				$.ajax({
+					type:"get",
+					data:{"id":id},
+					url:"http://localhost/XM/class/gai.php",
+					success:function(res){
+						if(res){
+							alert(res);
+							window.location.reload();
+						}else{
+							alert("失败");
+						}
+					}
+				});
+			})
+  	})
+
+
+  </script>
+</html>
